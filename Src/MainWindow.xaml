@@ -1,0 +1,42 @@
+﻿<Window x:Class="ListControlTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ListControlTest"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+
+    <Window.DataContext>
+        <local:MainWindowVM></local:MainWindowVM>
+    </Window.DataContext>
+    
+    <Grid>
+        <ItemsControl ItemsSource="{Binding Samples}">
+            <!-- コレクションの外観プロパティにControlTemplateを設定 -->
+            <ItemsControl.Template>
+                <!-- コレクションの外観プロパティ-->
+                <ControlTemplate TargetType="ItemsControl">
+                    <Border BorderThickness="1"
+                        BorderBrush="Black"
+                        Background="Azure">
+                        <!-- 要素を表示するパネルの位置を指定 -->
+                        <ScrollViewer>
+                            <ItemsPresenter Margin="20" />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </ItemsControl.Template>
+            <!-- 項目の外観プロパティにDataTemplateを設定 -->
+            <ItemsControl.ItemTemplate>
+                <!--項目の外観設定 -->
+                <DataTemplate>
+                    <StackPanel Margin="10">
+                        <Button Background="{Binding}" Height="50"></Button>
+                        <TextBlock Text="{Binding}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</Window>
