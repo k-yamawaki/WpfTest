@@ -1,21 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.ComponentModel;
-using System.Collections.ObjectModel;
 
-namespace ListControlTest
+namespace WpfTest
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -34,21 +20,11 @@ namespace ListControlTest
         }
     }
 
-    public class MainWindowVM : INotifyPropertyChanged
+    /// <summary>
+    /// MainWindow ViewModel
+    /// </summary>
+    public class MainWindowVM : ViewModelBase
     {
-        // INotifyPropertyChanged.PropertyChanged の実装
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // INotifyPropertyChanged.PropertyChangedイベントを発生させる。
-        protected virtual void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged == null)
-            {
-                return;
-            }
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public ObservableCollection<string> Samples
         {
             get { return _samples; }
