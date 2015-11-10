@@ -17,6 +17,46 @@ namespace WpfTest
         {
             MainWindowVM vm = DataContext as MainWindowVM;
             vm.Initialize();
+            vm.AdjustHeight(ActualHeight - 100*2);
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            MainWindowVM vm = DataContext as MainWindowVM;
+            vm.AdjustHeight(ActualHeight - 100 * 2);
+        }
+    }
+
+    public class Sample : INotifyPropertyChanged
+    {
+        // INotifyPropertyChanged.PropertyChanged の実装
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // INotifyPropertyChanged.PropertyChangedイベントを発生させる。
+        protected virtual void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged == null)
+            {
+                return;
+            }
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public string Color { get; set; }
+        public double ButtonHeight { get; set; }
+        public double TextHeight { get; set; }
+
+        public Sample(string color, double buttonHeight=30, double textHeight=20)
+        {
+            Color = color;
+            ButtonHeight = buttonHeight;
+            TextHeight = textHeight;
+        }
+
+        public void RaiseEvent()
+        {
+            RaisePropertyChanged("ButtonHeight");
+            RaisePropertyChanged("TextHeight");
         }
     }
 
@@ -34,14 +74,30 @@ namespace WpfTest
                 RaisePropertyChanged("Samples");
             }
         }
-        private ObservableCollection<string> _samples = new ObservableCollection<string>();
+        private ObservableCollection<Sample> _samples = new ObservableCollection<Sample>();
 
         public void Initialize()
         {
-            Samples.Add("Red");
-            Samples.Add("Blue");
-            Samples.Add("Green");
-            Samples.Add("Yellow");
+            Samples.Add(new Sample("Red"));
+            Samples.Add(new Sample("Blue"));
+            Samples.Add(new Sample("Green"));
+            Samples.Add(new Sample("Yellow"));
+        }
+
+        public void AdjustHeight(double panelHeight)
+        {
+            if (Samples.Count == 0)
+            {
+                return;
+            }
+
+            double height = panelHeight / Samples.Count;
+            foreach (Sample sample in Samples)
+            {
+                sample.TextHeight = height / 3;
+                sample.ButtonHeight = height - sample.TextHeight;
+                sample.RaiseEvent();
+            }
         }
     }
 }

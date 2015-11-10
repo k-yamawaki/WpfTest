@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
 
     <Window.DataContext>
         <local:MainWindowVM></local:MainWindowVM>
     </Window.DataContext>
     
     <Grid>
-        <ItemsControl ItemsSource="{Binding Samples}">
+        <ItemsControl x:Name="xSamplesControl" ItemsSource="{Binding Samples}" Margin="10">
             <!-- コレクションの外観プロパティにControlTemplateを設定 -->
             <ItemsControl.Template>
                 <!-- コレクションの外観プロパティ-->
@@ -32,8 +32,8 @@
                 <!--項目の外観設定 -->
                 <DataTemplate>
                     <StackPanel Margin="10">
-                        <Button Background="{Binding}" Height="50"></Button>
-                        <TextBlock Text="{Binding}"></TextBlock>
+                        <Button Background="{Binding Color}" Height="{Binding ButtonHeight}"></Button>
+                        <TextBlock Text="{Binding Color}" Height="{Binding TextHeight}"></TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
