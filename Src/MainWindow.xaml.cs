@@ -17,46 +17,13 @@ namespace WpfTest
         {
             MainWindowVM vm = DataContext as MainWindowVM;
             vm.Initialize();
-            vm.AdjustHeight(ActualHeight - 100*2);
+            vm.AdjustHeight(ActualHeight);
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             MainWindowVM vm = DataContext as MainWindowVM;
-            vm.AdjustHeight(ActualHeight - 100 * 2);
-        }
-    }
-
-    public class Sample : INotifyPropertyChanged
-    {
-        // INotifyPropertyChanged.PropertyChanged の実装
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // INotifyPropertyChanged.PropertyChangedイベントを発生させる。
-        protected virtual void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged == null)
-            {
-                return;
-            }
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public string Color { get; set; }
-        public double ButtonHeight { get; set; }
-        public double TextHeight { get; set; }
-
-        public Sample(string color, double buttonHeight=30, double textHeight=20)
-        {
-            Color = color;
-            ButtonHeight = buttonHeight;
-            TextHeight = textHeight;
-        }
-
-        public void RaiseEvent()
-        {
-            RaisePropertyChanged("ButtonHeight");
-            RaisePropertyChanged("TextHeight");
+            vm.AdjustHeight(ActualHeight);
         }
     }
 
@@ -65,7 +32,7 @@ namespace WpfTest
     /// </summary>
     public class MainWindowVM : ViewModelBase
     {
-        public ObservableCollection<string> Samples
+        public ObservableCollection<Sample> Samples
         {
             get { return _samples; }
             set
@@ -94,10 +61,33 @@ namespace WpfTest
             double height = panelHeight / Samples.Count;
             foreach (Sample sample in Samples)
             {
-                sample.TextHeight = height / 3;
-                sample.ButtonHeight = height - sample.TextHeight;
-                sample.RaiseEvent();
+                sample.Height = height;
             }
         }
     }
+
+    /// <summary>
+    /// Item of ItemsCollection
+    /// </summary>
+    public class Sample : ViewModelBase
+    {
+        public string Color { get; set; }
+        public double Height
+        {
+            get { return height; }
+            set
+            {
+                height = value;
+                RaisePropertyChanged("Height");
+            }
+        }
+        private double height;
+
+        public Sample(string color, double height = 50)
+        {
+            Color = color;
+            Height = height;
+        }
+    }
+
 }

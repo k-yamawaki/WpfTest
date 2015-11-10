@@ -11,8 +11,8 @@
         <local:MainWindowVM></local:MainWindowVM>
     </Window.DataContext>
     
-    <Grid>
-        <ItemsControl x:Name="xSamplesControl" ItemsSource="{Binding Samples}" Margin="10">
+    <DockPanel>
+        <ItemsControl x:Name="xSamplesControl" DockPanel.Dock="Left" ItemsSource="{Binding Samples}" Margin="10">
             <!-- コレクションの外観プロパティにControlTemplateを設定 -->
             <ItemsControl.Template>
                 <!-- コレクションの外観プロパティ-->
@@ -31,12 +31,13 @@
             <ItemsControl.ItemTemplate>
                 <!--項目の外観設定 -->
                 <DataTemplate>
-                    <StackPanel Margin="10">
-                        <Button Background="{Binding Color}" Height="{Binding ButtonHeight}"></Button>
-                        <TextBlock Text="{Binding Color}" Height="{Binding TextHeight}"></TextBlock>
+                    <StackPanel Margin="10" Height="{Binding Height}">
+                        <Button Background="{Binding Color}"></Button>
+                        <TextBlock Text="{Binding Color}"></TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-    </Grid>
+        <local:ListCanvas></local:ListCanvas>
+    </DockPanel>
 </Window>
