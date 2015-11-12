@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="WpfTest.ListGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfTest"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
+    <UserControl.DataContext>
+        <local:ListGridVM></local:ListGridVM>
+    </UserControl.DataContext>
+    <Grid>
+        <ItemsControl x:Name="xGridControl" Margin="10" ItemsSource="{Binding Items}">
+            <!-- コレクションの外観プロパティにControlTemplateを設定 -->
+            <ItemsControl.Template>
+                <!-- コレクションの外観プロパティ-->
+                <ControlTemplate TargetType="ItemsControl">
+                    <Border BorderThickness="1"
+                        BorderBrush="Black"
+                        Background="Azure">
+                        <!-- 要素を表示するパネルの位置を指定 -->
+                        <ItemsPresenter Margin="20" />
+                    </Border>
+                </ControlTemplate>
+            </ItemsControl.Template>
+            <!-- 項目コンテナをGridにする -->
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid Background="LightGreen" ShowGridLines="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <!-- 項目コンテナのスタイルを設定 -->
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Grid.Column" Value="{Binding Path=ColumnIndex}"/>
+                    <Setter Property="Grid.Row" Value="{Binding Path=RowIndex}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <!-- 項目の外観プロパティにDataTemplateを設定 -->
+            <ItemsControl.ItemTemplate>
+                <!--項目の外観設定 -->
+                <DataTemplate>
+                    <Canvas Margin="10" Background="{Binding Background}"></Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>

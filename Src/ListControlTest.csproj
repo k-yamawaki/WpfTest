@@ -57,12 +57,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ListBoxButton.xaml.cs">
+      <DependentUpon>ListBoxButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListBoxButtonVM.cs" />
     <Compile Include="ListCanvas.xaml.cs">
       <DependentUpon>ListCanvas.xaml</DependentUpon>
     </Compile>
     <Compile Include="ListCanvasVM.cs" />
+    <Compile Include="ListGrid.xaml.cs">
+      <DependentUpon>ListGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListGridVM.cs" />
     <Compile Include="ViewModelBase.cs" />
+    <Page Include="ListBoxButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ListCanvas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

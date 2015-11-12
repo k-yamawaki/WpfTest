@@ -12,7 +12,7 @@
     </Window.DataContext>
     
     <DockPanel>
-        <ItemsControl x:Name="xSamplesControl" DockPanel.Dock="Left" ItemsSource="{Binding Samples}" Margin="10">
+        <ItemsControl x:Name="xSamplesControl" DockPanel.Dock="Left" ItemsSource="{Binding Samples}" Margin="10,9,10,11">
             <!-- コレクションの外観プロパティにControlTemplateを設定 -->
             <ItemsControl.Template>
                 <!-- コレクションの外観プロパティ-->
@@ -38,6 +38,8 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <local:ListCanvas></local:ListCanvas>
+        <local:ListCanvas DockPanel.Dock="Left"></local:ListCanvas>
+        <local:ListBoxButton></local:ListBoxButton>
+        <local:ListGrid></local:ListGrid>
     </DockPanel>
 </Window>
