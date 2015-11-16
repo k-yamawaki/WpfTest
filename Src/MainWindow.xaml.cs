@@ -25,6 +25,17 @@ namespace WpfTest
             MainWindowVM vm = DataContext as MainWindowVM;
             vm.AdjustHeight(ActualHeight);
         }
+
+        /// <summary>
+        /// カスタマイズイベントを処理する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListGrid_Customized(object sender, RoutedEventArgs e)
+        {
+            CustomizedRoutedEventArgs ea = e as CustomizedRoutedEventArgs;
+            MessageBox.Show(ea.Tag.ToString());
+        }
     }
 
     /// <summary>

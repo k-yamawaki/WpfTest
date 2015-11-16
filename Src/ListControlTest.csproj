@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EventArgsClasses.cs" />
     <Compile Include="ListBoxButton.xaml.cs">
       <DependentUpon>ListBoxButton.xaml</DependentUpon>
     </Compile>

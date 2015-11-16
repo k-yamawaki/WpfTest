@@ -49,7 +49,7 @@
             <ItemsControl.ItemTemplate>
                 <!--項目の外観設定 -->
                 <DataTemplate>
-                    <Canvas Margin="10" Background="{Binding Background}"></Canvas>
+                    <Canvas Margin="10" Background="{Binding Background}" MouseDown="Canvas_MouseDown"></Canvas>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

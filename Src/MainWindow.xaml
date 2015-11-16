@@ -40,6 +40,6 @@
         </ItemsControl>
         <local:ListCanvas DockPanel.Dock="Left"></local:ListCanvas>
         <local:ListBoxButton></local:ListBoxButton>
-        <local:ListGrid></local:ListGrid>
+        <local:ListGrid Customized="ListGrid_Customized"></local:ListGrid>
     </DockPanel>
 </Window>

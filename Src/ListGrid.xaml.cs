@@ -20,6 +20,29 @@ namespace WpfTest
     /// </summary>
     public partial class ListGrid : UserControl
     {
+        /// <summary>
+        /// カスタマイズルーテッドイベントデリゲート
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void CustomizedRoutedEventHander(object sender, CustomizedRoutedEventArgs e);
+
+        /// <summary>
+        /// カスタマイズルーテッドイベント
+        /// </summary>
+        public static readonly RoutedEvent CustomizedEvent = EventManager.RegisterRoutedEvent(
+            "Customized"
+            , RoutingStrategy.Bubble
+            , typeof(RoutedEventHandler)
+            , typeof(ListGrid)
+            );
+
+        public event RoutedEventHandler Customized
+        {
+            add { AddHandler(CustomizedEvent, value); }
+            remove { RemoveHandler(CustomizedEvent, value); }
+        }
+
         public ListGrid()
         {
             InitializeComponent();
@@ -29,6 +52,19 @@ namespace WpfTest
         {
             ListGridVM vm = DataContext as ListGridVM;
             vm.Initalize();
+        }
+
+        /// <summary>
+        /// キャンバスマウスダウン
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Canvas ctrl = sender as Canvas;
+            GridItem vm = ctrl.DataContext as GridItem;
+            CustomizedRoutedEventArgs ea = new CustomizedRoutedEventArgs(CustomizedEvent, this, vm.Background);
+            RaiseEvent(ea);
         }
     }
 }
